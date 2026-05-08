@@ -12,7 +12,7 @@ export default function GcsTopNav() {
     <header className="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-6 bg-black/80 backdrop-blur-xl border-b border-white/10 h-14 pointer-events-auto">
       <div className="flex items-center gap-4">
         <span className="text-xl font-black tracking-tighter text-orange-600 dark:text-orange-500">
-          AERION GCS
+          AERION Mind
         </span>
         <div className="h-4 w-px bg-white/20"></div>
         <span className="font-['Inter'] tracking-tight uppercase font-bold text-xs text-orange-500">

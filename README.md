@@ -1,7 +1,7 @@
 <div align="center">
   <img src="assets/w1.png" alt="Aerion SkyWatch 3D Logo" width="100%">
   
-  # 🦅 Aerion SkyWatch 3D (Tactical Obsidian GCS)
+  # 🦅 AERION Mind (Tactical Obsidian GCS)
   
   **대규모 스웜(Swarm) 관제 플랫폼을 위한 초고성능 3D 실시간 텔레메트리 대시보드**
 </div>
@@ -10,7 +10,7 @@
 
 ## 🚀 프로젝트 소개 (Overview)
 
-**Aerion SkyWatch 3D**는 300대 이상의 다중 드론(Swarm)에서 쏟아지는 실시간 텔레메트리 데이터를 지연이나 프레임 드랍 없이 부드럽게 3D 지도 렌더링 환경에 투사해, 지휘관이 직관적으로 전술 관제를 수행할 수 있는 차세대 GCS(Ground Control Station) 인터페이스입니다.
+**AERION Mind**는 300대 이상의 다중 드론(Swarm)에서 쏟아지는 실시간 텔레메트리 데이터를 지연이나 프레임 드랍 없이 부드럽게 3D 지도 렌더링 환경에 투사해, 지휘관이 직관적으로 전술 관제를 수행할 수 있는 차세대 GCS(Ground Control Station) 인터페이스입니다.
 
 React 생태계의 성능 한계를 극복하기 위해 가상 DOM을 완전히 우회하고, WebGL 엔진에 다이렉트로 메모리 포인터를 꽂아넣는 **역제어 패턴(preUpdate Loop Hooking)** 기술을 적용하여 극강의 퍼포먼스를 자랑합니다.
 
