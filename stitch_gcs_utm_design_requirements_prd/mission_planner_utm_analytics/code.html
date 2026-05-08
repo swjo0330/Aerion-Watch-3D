@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AeroControl GCS | Mission Planner</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>body {
+    font-family: "Inter", sans-serif;
+    background-color: #0e0e0e;
+    color: #e5e2e1;
+    overflow: hidden
+    }
+.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
+    }
+.glass-panel {
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px)
+    }
+.map-container {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuB50Jj6DO84j2TWYXNilXmabEtx-TbeeisJsXzvnd3ig0oEtV4jSN_srQdrq_1p24jqmRKLuAXu9s2mgx1WDHSjNg6CIcPGniHsb6TZ5j4LtXzg1CQfSsLqzhznnq_fbZs7DBvJ2YamnPEdtFWWVMV772_oUCSIFZtVcEQ-D3ZfOMQ-ibjFdbR-W3hyU_g9kQJGt-KpVbZZOH728_fcZUIjExgriU-Bk8453d7hO8onvDikFNiesPfec2-98YvX2_Tm2u6FrzlrJidr);
+    background-size: cover;
+    background-position: center
+    }
+/* Custom Glowing Path */
+.flight-path {
+    filter: drop-shadow(0 0 8px rgba(255, 92, 0, 0.6))
+    }</style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "on-secondary": "#2f3034",
+                "primary-container": "#ff5c00",
+                "secondary-fixed": "#e3e2e7",
+                "secondary-fixed-dim": "#c7c6cb",
+                "on-error-container": "#ffdad6",
+                "surface-dim": "#131313",
+                "surface-container": "#201f1f",
+                "primary": "#ffb59a",
+                "outline": "#ab897d",
+                "surface-tint": "#ffb59a",
+                "on-tertiary-fixed-variant": "#00531a",
+                "on-surface": "#e5e2e1",
+                "error": "#ffb4ab",
+                "on-tertiary": "#003910",
+                "on-primary-container": "#521800",
+                "surface-container-lowest": "#0e0e0e",
+                "on-primary": "#5a1b00",
+                "on-primary-fixed": "#370e00",
+                "surface-container-low": "#1c1b1b",
+                "on-secondary-container": "#b5b4ba",
+                "inverse-surface": "#e5e2e1",
+                "inverse-on-surface": "#313030",
+                "outline-variant": "#5b4137",
+                "surface-container-high": "#2a2a2a",
+                "tertiary-container": "#00a93f",
+                "tertiary-fixed": "#6cff82",
+                "error-container": "#93000a",
+                "on-secondary-fixed": "#1a1b1f",
+                "surface-bright": "#3a3939",
+                "surface-variant": "#353534",
+                "secondary": "#c7c6cb",
+                "surface-container-highest": "#353534",
+                "primary-fixed": "#ffdbce",
+                "tertiary": "#47e266",
+                "on-tertiary-container": "#00330d",
+                "primary-fixed-dim": "#ffb59a",
+                "on-background": "#e5e2e1",
+                "secondary-container": "#46464b",
+                "on-secondary-fixed-variant": "#46464b",
+                "on-tertiary-fixed": "#002106",
+                "surface": "#131313",
+                "inverse-primary": "#a73a00",
+                "background": "#131313",
+                "on-surface-variant": "#e4beb1",
+                "tertiary-fixed-dim": "#47e266",
+                "on-primary-fixed-variant": "#802a00",
+                "on-error": "#690005"
+              },
+              fontFamily: {
+                "headline": ["Inter"],
+                "body": ["Inter"],
+                "label": ["Inter"]
+              },
+              borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-surface-container-lowest overflow-hidden h-screen w-screen">
+<!-- TOP NAVIGATION BAR (Based on Shared Components JSON) -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-6 bg-black/80 backdrop-blur-xl border-b border-white/10 h-12">
+<div class="text-lg font-black tracking-tighter text-orange-600 dark:text-orange-500">
+            AeroControl GCS
+        </div>
+<nav class="hidden md:flex items-center space-x-8 text-sm font-medium tracking-tight">
+<a class="text-orange-100/70 hover:text-white transition-colors duration-200" href="#">Fleet</a>
+<a class="text-orange-500 font-bold border-b-2 border-orange-500 pb-1 hover:text-white transition-colors duration-200" href="#">Missions</a>
+<a class="text-orange-100/70 hover:text-white transition-colors duration-200" href="#">Traffic</a>
+<a class="text-orange-100/70 hover:text-white transition-colors duration-200" href="#">Analytics</a>
+</nav>
+<div class="flex items-center space-x-4">
+<span class="material-symbols-outlined text-orange-100/70 text-lg hover:text-white cursor-pointer" data-icon="cell_tower">cell_tower</span>
+<span class="material-symbols-outlined text-orange-100/70 text-lg hover:text-white cursor-pointer" data-icon="wifi">wifi</span>
+<div class="h-6 w-6 rounded-full bg-surface-container-highest border border-white/10 flex items-center justify-center overflow-hidden">
+<span class="material-symbols-outlined text-sm" data-icon="account_circle">account_circle</span>
+</div>
+</div>
+</header>
+<!-- 3D MAP BACKGROUND CANVAS -->
+<main class="relative h-screen w-screen map-container" data-alt="high-resolution 3D satellite view of rugged canyon terrain with sharp shadows and dramatic depth mapping" data-location="Grand Canyon National Park">
+<!-- SVG OVERLAY FOR FLIGHT PATH -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none z-10 flight-path">
+<polyline fill="none" points="400,500 600,420 850,480 1100,350 1400,450" stroke="rgba(255, 92, 0, 0.8)" stroke-dasharray="8 4" stroke-width="3"></polyline>
+<!-- Waypoint 1 -->
+<circle cx="400" cy="500" fill="#131313" r="6" stroke="#e5e2e1" stroke-width="2"></circle>
+<text fill="#e5e2e1" font-size="12" font-weight="bold" x="395" y="490">1</text>
+<!-- Waypoint 2 -->
+<circle cx="600" cy="420" fill="#131313" r="6" stroke="#e5e2e1" stroke-width="2"></circle>
+<text fill="#e5e2e1" font-size="12" font-weight="bold" x="595" y="410">2</text>
+<!-- Waypoint 3 (Highlighted Selected) -->
+<circle class="animate-pulse" cx="850" cy="480" fill="#ff5c00" r="10" stroke="#fff" stroke-width="3"></circle>
+<text fill="#ff5c00" font-size="14" font-weight="black" x="845" y="465">3</text>
+<!-- Waypoint 4 -->
+<circle cx="1100" cy="350" fill="#131313" r="6" stroke="#e5e2e1" stroke-width="2"></circle>
+<text fill="#e5e2e1" font-size="12" font-weight="bold" x="1095" y="340">4</text>
+<!-- Waypoint 5 -->
+<circle cx="1400" cy="450" fill="#131313" r="6" stroke="#e5e2e1" stroke-width="2"></circle>
+<text fill="#e5e2e1" font-size="12" font-weight="bold" x="1395" y="440">5</text>
+</svg>
+<!-- LEFT SIDEBAR: MISSION CATALOG & WAYPOINTS -->
+<aside class="fixed left-6 top-20 bottom-24 w-80 z-40 flex flex-col space-y-4">
+<!-- Header section -->
+<div class="bg-zinc-900/80 backdrop-blur-xl rounded-2xl p-4 border border-white/5 shadow-2xl">
+<div class="flex justify-between items-center mb-4">
+<h2 class="text-xs font-black tracking-widest uppercase text-on-surface-variant">Mission Catalog</h2>
+<span class="px-2 py-0.5 bg-primary-container text-on-primary-container text-[10px] font-bold rounded">LIVE</span>
+</div>
+<div class="space-y-2">
+<div class="flex items-center justify-between bg-surface-bright/20 p-2 rounded-lg border-l-2 border-primary-container">
+<span class="text-sm font-medium">Canyon_Patrol_Alpha</span>
+<span class="material-symbols-outlined text-primary" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+</div>
+<!-- Waypoint List -->
+<div class="flex-1 bg-zinc-900/80 backdrop-blur-xl rounded-2xl p-4 border border-white/5 shadow-2xl overflow-y-auto space-y-3">
+<h2 class="text-xs font-black tracking-widest uppercase text-on-surface-variant mb-2">Waypoint Configuration</h2>
+<!-- WP-1 -->
+<div class="bg-surface-container-high rounded-xl p-3 border border-white/5 transition-all hover:bg-surface-bright/30">
+<div class="flex justify-between items-start mb-2">
+<span class="text-xs font-bold text-on-surface-variant">WP-1</span>
+<span class="text-[10px] text-tertiary">REACHED</span>
+</div>
+<div class="grid grid-cols-2 gap-2 text-[10px] font-mono text-on-surface">
+<div>ALT: 120m</div>
+<div>SPD: 12m/s</div>
+</div>
+</div>
+<!-- WP-3 (Active/Selected) -->
+<div class="bg-surface-container-highest rounded-xl p-3 border border-primary-container/40 shadow-[0_0_15px_rgba(255,92,0,0.15)] ring-1 ring-primary-container">
+<div class="flex justify-between items-start mb-2">
+<span class="text-xs font-bold text-primary">WP-3</span>
+<span class="text-[10px] text-primary animate-pulse">SELECTED</span>
+</div>
+<div class="grid grid-cols-1 gap-3">
+<div class="space-y-1">
+<label class="text-[9px] uppercase tracking-widest text-on-surface-variant">Altitude (m)</label>
+<input class="w-full bg-black/40 border-b border-primary-container text-primary font-bold text-sm focus:outline-none py-1" type="text" value="450.25"/>
+</div>
+<div class="grid grid-cols-2 gap-2">
+<div class="space-y-1">
+<label class="text-[9px] uppercase tracking-widest text-on-surface-variant">Latitude</label>
+<div class="text-[10px] font-mono">36.1070° N</div>
+</div>
+<div class="space-y-1">
+<label class="text-[9px] uppercase tracking-widest text-on-surface-variant">Longitude</label>
+<div class="text-[10px] font-mono">112.1130° W</div>
+</div>
+</div>
+</div>
+</div>
+<!-- WP-4 -->
+<div class="bg-surface-container-high rounded-xl p-3 border border-white/5 opacity-60">
+<div class="flex justify-between items-start mb-2">
+<span class="text-xs font-bold text-on-surface-variant">WP-4</span>
+<span class="text-[10px] text-on-surface-variant/50">PENDING</span>
+</div>
+<div class="grid grid-cols-2 gap-2 text-[10px] font-mono text-on-surface">
+<div>ALT: 380m</div>
+<div>SPD: 15m/s</div>
+</div>
+</div>
+</div>
+</aside>
+<!-- RIGHT SIDEBAR: ANALYSIS & TELEMETRY PREDICTION -->
+<aside class="fixed right-6 top-20 bottom-24 w-80 z-40 space-y-4">
+<!-- Summary Card -->
+<div class="bg-zinc-900/80 backdrop-blur-xl rounded-2xl p-6 border border-white/5 shadow-2xl">
+<h2 class="text-xs font-black tracking-widest uppercase text-on-surface-variant mb-6">Mission Analysis</h2>
+<div class="space-y-6">
+<!-- Metric 1 -->
+<div>
+<div class="flex justify-between items-end mb-1">
+<span class="text-[10px] text-on-surface-variant font-bold">TOTAL DISTANCE</span>
+<span class="text-lg font-black tracking-tighter text-on-surface">14.8 <span class="text-xs font-normal opacity-60">km</span></span>
+</div>
+<div class="h-[1px] w-full bg-white/5"></div>
+</div>
+<!-- Metric 2 -->
+<div>
+<div class="flex justify-between items-end mb-1">
+<span class="text-[10px] text-on-surface-variant font-bold">ESTIMATED TIME</span>
+<span class="text-lg font-black tracking-tighter text-on-surface">24:45 <span class="text-xs font-normal opacity-60">min</span></span>
+</div>
+<div class="h-[1px] w-full bg-white/5"></div>
+</div>
+<!-- Metric 3 with Chart -->
+<div>
+<div class="flex justify-between items-end mb-2">
+<span class="text-[10px] text-on-surface-variant font-bold">BATTERY CONSUMPTION</span>
+<span class="text-lg font-black tracking-tighter text-primary">68 <span class="text-xs font-normal opacity-60 text-on-surface">%</span></span>
+</div>
+<div class="h-12 w-full flex items-end space-x-1 mb-2">
+<div class="w-full h-4 bg-primary-container/20 rounded-sm"></div>
+<div class="w-full h-6 bg-primary-container/20 rounded-sm"></div>
+<div class="w-full h-8 bg-primary-container/40 rounded-sm"></div>
+<div class="w-full h-10 bg-primary-container/60 rounded-sm"></div>
+<div class="w-full h-12 bg-primary-container/80 rounded-sm"></div>
+<div class="w-full h-9 bg-primary-container/50 rounded-sm"></div>
+<div class="w-full h-6 bg-primary-container/30 rounded-sm"></div>
+</div>
+<div class="w-full h-1.5 bg-surface-container-high rounded-full overflow-hidden">
+<div class="w-2/3 h-full bg-primary-container"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- UTM Status Panel -->
+<div class="bg-zinc-900/80 backdrop-blur-xl rounded-2xl p-4 border border-white/5 shadow-2xl">
+<h2 class="text-xs font-black tracking-widest uppercase text-on-surface-variant mb-4">Traffic Conflict Analysis</h2>
+<div class="space-y-3">
+<div class="flex items-center space-x-3 p-2 bg-tertiary/10 rounded-lg border-l-2 border-tertiary">
+<span class="material-symbols-outlined text-tertiary text-sm" data-icon="verified_user">verified_user</span>
+<div class="text-[10px]">No active trajectory conflicts detected in UTM sector G-14.</div>
+</div>
+</div>
+</div>
+</aside>
+<!-- BOTTOM NAVIGATION & TIMELINE -->
+<div class="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 flex items-center space-x-6">
+<!-- Timeline Shell (Based on BottomNavBar) -->
+<div class="bg-zinc-900/90 backdrop-blur-2xl rounded-full px-8 py-3 flex items-center space-x-6 border border-white/5 shadow-2xl shadow-black/60">
+<div class="flex items-center space-x-4">
+<button class="text-white/80 hover:text-primary transition-all">
+<span class="material-symbols-outlined" data-icon="skip_previous">skip_previous</span>
+</button>
+<button class="bg-primary-container text-on-primary-container rounded-full p-2 hover:scale-105 active:scale-95 transition-all">
+<span class="material-symbols-outlined" data-icon="play_arrow" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+<button class="text-white/80 hover:text-primary transition-all">
+<span class="material-symbols-outlined" data-icon="skip_next">skip_next</span>
+</button>
+</div>
+<div class="w-64 h-1 bg-surface-container-high rounded-full relative">
+<div class="absolute inset-y-0 left-0 w-1/3 bg-primary-container rounded-full"></div>
+<div class="absolute top-1/2 left-1/3 -translate-y-1/2 h-3 w-3 bg-white rounded-full shadow-lg border-2 border-primary-container"></div>
+</div>
+<div class="text-[10px] font-mono text-white/50 tracking-widest">
+                    08:14 / 24:45
+                </div>
+</div>
+</div>
+<!-- PRIMARY CTA (BOTTOM RIGHT) -->
+<button class="fixed bottom-8 right-8 z-50 bg-primary-container text-on-primary-container hover:bg-primary-container/90 px-8 py-4 rounded-full font-black text-sm uppercase tracking-widest shadow-2xl shadow-primary-container/20 flex items-center space-x-3 transition-all hover:scale-105 active:scale-95">
+<span>Upload Mission</span>
+<span class="material-symbols-outlined" data-icon="rocket_launch">rocket_launch</span>
+</button>
+</main>
+<!-- SIDE NAVIGATION (DOCK STYLE) -->
+<nav class="fixed left-4 top-1/2 -translate-y-1/2 w-14 bg-zinc-900/80 backdrop-blur-xl rounded-3xl py-6 flex flex-col items-center space-y-8 shadow-2xl border border-white/5 z-50">
+<div class="text-primary-container">
+<span class="material-symbols-outlined p-3 bg-primary-container text-white rounded-full shadow-[0_0_8px_rgba(255,92,0,0.4)]" data-icon="precision_manufacturing">precision_manufacturing</span>
+</div>
+<div class="text-orange-100/50 p-3 hover:bg-white/5 hover:text-white rounded-xl transition-all cursor-pointer">
+<span class="material-symbols-outlined" data-icon="list_alt">list_alt</span>
+</div>
+<div class="text-orange-100/50 p-3 hover:bg-white/5 hover:text-white rounded-xl transition-all cursor-pointer">
+<span class="material-symbols-outlined" data-icon="cloud">cloud</span>
+</div>
+<div class="text-orange-100/50 p-3 hover:bg-white/5 hover:text-white rounded-xl transition-all cursor-pointer">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</div>
+</nav>
+<!-- STATUS OVERLAY (TOP LEFT) -->
+<div class="fixed top-16 left-24 z-40 flex items-center space-x-4">
+<div class="flex items-center space-x-2 bg-black/40 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/5">
+<div class="h-2 w-2 rounded-full bg-tertiary animate-pulse"></div>
+<span class="text-[10px] font-bold tracking-tight text-white">DRN-Active: 12</span>
+</div>
+<div class="flex items-center space-x-2 bg-black/40 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/5">
+<span class="material-symbols-outlined text-[10px] text-primary" data-icon="satellite_alt">satellite_alt</span>
+<span class="text-[10px] font-bold tracking-tight text-white">GCS Link: Optimal</span>
+</div>
+</div>
+</body></html>

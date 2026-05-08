@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AERION | GROUND CONTROL</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-container": "#00330d",
+                        "primary-fixed": "#ffdbce",
+                        "primary": "#ffb59a",
+                        "on-secondary-fixed-variant": "#46464b",
+                        "on-primary-fixed-variant": "#802a00",
+                        "on-error": "#690005",
+                        "inverse-primary": "#a73a00",
+                        "tertiary-fixed-dim": "#47e266",
+                        "primary-fixed-dim": "#ffb59a",
+                        "on-tertiary": "#003910",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-highest": "#353534",
+                        "error-container": "#93000a",
+                        "secondary-container": "#46464b",
+                        "secondary": "#c7c6cb",
+                        "outline": "#ab897d",
+                        "on-primary-fixed": "#370e00",
+                        "tertiary-container": "#00a93f",
+                        "surface-variant": "#353534",
+                        "on-secondary-container": "#b5b4ba",
+                        "error": "#ffb4ab",
+                        "secondary-fixed-dim": "#c7c6cb",
+                        "on-surface-variant": "#e4beb1",
+                        "on-secondary-fixed": "#1a1b1f",
+                        "inverse-surface": "#e5e2e1",
+                        "secondary-fixed": "#e3e2e7",
+                        "on-surface": "#e5e2e1",
+                        "on-background": "#e5e2e1",
+                        "tertiary": "#47e266",
+                        "tertiary-fixed": "#6cff82",
+                        "on-primary": "#5a1b00",
+                        "inverse-on-surface": "#313030",
+                        "outline-variant": "#5b4137",
+                        "surface-container": "#201f1f",
+                        "on-tertiary-fixed-variant": "#00531a",
+                        "surface-container-high": "#2a2a2a",
+                        "on-tertiary-fixed": "#002106",
+                        "primary-container": "#ff5c00",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-secondary": "#2f3034",
+                        "surface-container-low": "#1c1b1b",
+                        "on-primary-container": "#521800",
+                        "surface-bright": "#3a3939",
+                        "surface-tint": "#ffb59a",
+                        "surface": "#131313",
+                        "surface-dim": "#131313",
+                        "background": "#131313"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .mesh-line {
+            background: linear-gradient(90deg, transparent 0%, #ff5c00 50%, transparent 100%);
+            height: 1px;
+            opacity: 0.4;
+        }
+        .glass-panel {
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+        }
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.1);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #353534;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-surface-container-lowest text-on-surface font-body overflow-hidden h-screen select-none">
+<!-- Top Navigation Shell -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-6 h-14 bg-neutral-950/80 backdrop-blur-xl border-b border-white/10">
+<div class="flex items-center gap-4">
+<span class="text-xl font-black tracking-tighter text-neutral-50">GROUND CONTROL</span>
+<div class="h-4 w-px bg-white/20"></div>
+<span class="font-['Inter'] tracking-tight uppercase font-bold text-xs text-orange-500">AERION OS v4.2</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-neutral-400 hover:text-orange-400 transition-colors text-sm">hub</span>
+<span class="material-symbols-outlined text-neutral-400 hover:text-orange-400 transition-colors text-sm">lan</span>
+<span class="material-symbols-outlined text-neutral-400 hover:text-orange-400 transition-colors text-sm">satellite_alt</span>
+</div>
+<div class="flex gap-2">
+<button class="px-3 py-1 bg-surface-container-highest border border-white/10 text-[10px] font-bold tracking-widest uppercase rounded">OVERRIDE</button>
+<button class="px-3 py-1 bg-primary-container text-on-primary-container text-[10px] font-bold tracking-widest uppercase rounded shadow-[0_0_12px_rgba(255,92,0,0.4)]">MISSION ACTIVE</button>
+</div>
+</div>
+</header>
+<!-- Side Navigation Shell -->
+<aside class="fixed left-0 top-14 h-[calc(100vh-3.5rem)] z-40 flex flex-col pt-4 bg-neutral-950/85 backdrop-blur-2xl border-r border-white/5 w-64 hidden md:flex">
+<div class="px-6 mb-8">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center border border-white/10">
+<span class="material-symbols-outlined text-orange-500">person</span>
+</div>
+<div>
+<p class="text-[10px] font-bold text-orange-500 tracking-tighter uppercase">OPERATOR-01</p>
+<p class="text-[9px] text-neutral-500 uppercase tracking-widest">RANK: COMMANDER</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 px-2 space-y-1">
+<div class="bg-orange-600/20 text-orange-500 border-l-2 border-orange-600 px-4 py-3 flex items-center gap-3 font-medium text-sm tracking-wide">
+<span class="material-symbols-outlined text-sm">grid_view</span>
+<span>Swarm Overview</span>
+</div>
+<div class="text-neutral-500 px-4 py-3 flex items-center gap-3 hover:bg-white/5 hover:text-neutral-200 transition-all font-medium text-sm tracking-wide">
+<span class="material-symbols-outlined text-sm">psychology</span>
+<span>Agent Reasoning</span>
+</div>
+<div class="text-neutral-500 px-4 py-3 flex items-center gap-3 hover:bg-white/5 hover:text-neutral-200 transition-all font-medium text-sm tracking-wide">
+<span class="material-symbols-outlined text-sm">hub</span>
+<span>Tactical Mesh</span>
+</div>
+<div class="text-neutral-500 px-4 py-3 flex items-center gap-3 hover:bg-white/5 hover:text-neutral-200 transition-all font-medium text-sm tracking-wide">
+<span class="material-symbols-outlined text-sm">settings_heart</span>
+<span>System Health</span>
+</div>
+</nav>
+<div class="px-4 pb-6 mt-auto">
+<button class="w-full bg-primary-container text-on-primary-container py-3 rounded-DEFAULT font-bold text-xs tracking-widest uppercase shadow-[0_0_20px_rgba(255,92,0,0.2)]">DEPLOY SWARM</button>
+<div class="mt-4 pt-4 border-t border-white/5 space-y-1">
+<div class="text-neutral-500 px-4 py-2 flex items-center gap-3 hover:text-neutral-200 text-xs">
+<span class="material-symbols-outlined text-xs">terminal</span>
+<span>Logs</span>
+</div>
+<div class="text-neutral-500 px-4 py-2 flex items-center gap-3 hover:text-neutral-200 text-xs">
+<span class="material-symbols-outlined text-xs">help_center</span>
+<span>Help</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-0 md:ml-64 mt-14 h-[calc(100vh-3.5rem)] relative overflow-hidden flex flex-col">
+<!-- 3D Tactical Mesh Background (Visual Simulation) -->
+<div class="absolute inset-0 z-0 bg-surface-container-lowest">
+<img alt="Tactical Map Surface" class="w-full h-full object-cover opacity-60 mix-blend-screen" data-alt="Cinematic 3D topographical dark terrain map with glowing neon grid and orange digital data points representing drone locations" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUx8jpDv38EevTuZs5M_UKN92J1nuK0sf_42SgY2lIGi_mMpD-_YHQVY7wmggTX4moYyWnDiWwoG_l-J2OzNKtLOOj3z8uJbNFSV80YWDd7ILXHGANgTmSmqV63by1qaHij-XKeXveqVhsP9ey2gVjflFBLzJpwsVOuXjLT2I6auNNs82QepYqgQN9ceoJYT7_0HHDmopwPkRvIK557Z1VMdkdwnAYoo0Pl4vkeEyBhstoaVpTgzRvlRghS-ZhpZtE-5t8dG7lmHNh"/>
+<!-- Swarm Visual Layer Overlay -->
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+<div class="relative w-[600px] h-[400px]">
+<!-- Central Node -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-primary rounded-full shadow-[0_0_20px_#ffb59a]">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap text-[10px] font-bold text-primary">LEAD_DRN_ALPHA</div>
+</div>
+<!-- Leaf Nodes & Lines -->
+<div class="absolute top-1/4 left-1/4 w-2 h-2 bg-tertiary rounded-full shadow-[0_0_10px_#47e266]"></div>
+<div class="absolute top-1/4 right-1/4 w-2 h-2 bg-tertiary rounded-full shadow-[0_0_10px_#47e266]"></div>
+<div class="absolute bottom-1/4 left-1/3 w-2 h-2 bg-tertiary rounded-full shadow-[0_0_10px_#47e266]"></div>
+<div class="absolute bottom-1/4 right-1/3 w-2 h-2 bg-tertiary rounded-full shadow-[0_0_10px_#47e266]"></div>
+<!-- Mesh Lines -->
+<svg class="absolute inset-0 w-full h-full opacity-30" viewbox="0 0 600 400">
+<line stroke="#ffb59a" stroke-dasharray="4 2" stroke-width="1" x1="300" x2="150" y1="200" y2="100"></line>
+<line stroke="#ffb59a" stroke-dasharray="4 2" stroke-width="1" x1="300" x2="450" y1="200" y2="100"></line>
+<line stroke="#ffb59a" stroke-dasharray="4 2" stroke-width="1" x1="300" x2="200" y1="200" y2="300"></line>
+<line stroke="#ffb59a" stroke-dasharray="4 2" stroke-width="1" x1="300" x2="400" y1="200" y2="300"></line>
+</svg>
+</div>
+</div>
+</div>
+<div class="relative z-10 flex flex-1 p-6 gap-6">
+<!-- Left Panel: Agentic Reasoning Log -->
+<section class="w-80 flex flex-col gap-4">
+<div class="glass-panel bg-neutral-950/60 border border-white/10 rounded-DEFAULT flex-1 flex flex-col overflow-hidden">
+<div class="p-4 border-b border-white/5 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-orange-500 text-sm">psychology</span>
+<h2 class="text-[11px] font-bold tracking-widest uppercase">Agent Reasoning Log</h2>
+</div>
+<div class="flex gap-1">
+<div class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></div>
+</div>
+</div>
+<div class="p-4 space-y-4 overflow-y-auto text-[11px] leading-relaxed font-mono">
+<div class="space-y-1">
+<p class="text-neutral-500">14:20:01.42</p>
+<p class="text-on-surface">Evaluating mission constraints for Area 7...</p>
+</div>
+<div class="space-y-1">
+<p class="text-neutral-500">14:20:02.89</p>
+<p class="text-orange-400">Safety-Validator: Wind speeds at 24kts. Recalculating drag vectors.</p>
+</div>
+<div class="space-y-1">
+<p class="text-neutral-500">14:20:05.11</p>
+<p class="text-tertiary">NATS Mesh: Latency optimized across 12 leaf nodes.</p>
+</div>
+<div class="space-y-1">
+<p class="text-neutral-500">14:20:08.34</p>
+<p class="text-error">Critical: RTL required for DRN-005 - Logic anomaly detected in L2 handler.</p>
+</div>
+<div class="space-y-1">
+<p class="text-neutral-500">14:20:10.55</p>
+<p class="text-on-surface">Re-routing node DRN-006 to fill sector gap. Estimating arrival: 14s.</p>
+</div>
+<div class="space-y-1">
+<p class="text-neutral-500">14:20:12.12</p>
+<p class="text-on-surface">Evaluating optimal formation for obstacle avoidance...</p>
+</div>
+</div>
+</div>
+<!-- Small Telemetry Card -->
+<div class="glass-panel bg-neutral-950/60 border border-white/10 rounded-DEFAULT p-4">
+<div class="flex justify-between items-end">
+<div>
+<p class="text-[10px] text-neutral-500 font-bold tracking-wider uppercase">Active Nodes</p>
+<p class="text-4xl font-black text-on-surface -mt-1 tracking-tighter">12<span class="text-sm text-neutral-600">/14</span></p>
+</div>
+<div class="text-right">
+<p class="text-[10px] text-neutral-500 font-bold tracking-wider uppercase">Battery</p>
+<p class="text-2xl font-bold text-tertiary">84%</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Center Empty Space for Map Focus -->
+<div class="flex-1 flex flex-col justify-end">
+<!-- Floating Map Tools -->
+<div class="mb-6 self-end flex flex-col gap-2">
+<button class="w-10 h-10 bg-neutral-950/80 border border-white/10 rounded-full flex items-center justify-center text-neutral-400 hover:text-white transition-colors">
+<span class="material-symbols-outlined">add</span>
+</button>
+<button class="w-10 h-10 bg-neutral-950/80 border border-white/10 rounded-full flex items-center justify-center text-neutral-400 hover:text-white transition-colors">
+<span class="material-symbols-outlined">remove</span>
+</button>
+<button class="w-10 h-10 bg-neutral-950/80 border border-white/10 rounded-full flex items-center justify-center text-orange-500 transition-colors">
+<span class="material-symbols-outlined">my_location</span>
+</button>
+</div>
+</div>
+<!-- Right Panel: Hierarchical Monitoring -->
+<section class="w-96 flex flex-col gap-6">
+<div class="glass-panel bg-neutral-950/60 border border-white/10 rounded-DEFAULT p-5">
+<h2 class="text-[11px] font-bold tracking-widest uppercase mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-orange-500 text-sm">monitoring</span>
+                        Hierarchical Layer Monitoring
+                    </h2>
+<div class="space-y-8">
+<!-- Layer 1: DDS -->
+<div class="space-y-3">
+<div class="flex justify-between items-center">
+<div>
+<span class="text-[10px] font-black text-neutral-500 tracking-tighter mr-2">L1</span>
+<span class="text-xs font-bold uppercase tracking-widest">DDS Transport</span>
+</div>
+<span class="text-xs font-mono text-tertiary">2.4ms</span>
+</div>
+<div class="h-10 flex items-end gap-1 px-1">
+<div class="w-full bg-tertiary/20 h-4 rounded-sm"></div>
+<div class="w-full bg-tertiary/20 h-6 rounded-sm"></div>
+<div class="w-full bg-tertiary/20 h-3 rounded-sm"></div>
+<div class="w-full bg-tertiary/20 h-8 rounded-sm"></div>
+<div class="w-full bg-tertiary/20 h-5 rounded-sm"></div>
+<div class="w-full bg-tertiary/20 h-9 rounded-sm"></div>
+<div class="w-full bg-tertiary rounded-sm h-6"></div>
+</div>
+<div class="flex justify-between text-[9px] text-neutral-500 font-bold">
+<span>THROUGHPUT: 12.4 MB/S</span>
+<span>LOSS: 0.00%</span>
+</div>
+</div>
+<!-- Layer 2: NATS -->
+<div class="space-y-3">
+<div class="flex justify-between items-center">
+<div>
+<span class="text-[10px] font-black text-neutral-500 tracking-tighter mr-2">L2</span>
+<span class="text-xs font-bold uppercase tracking-widest">NATS SWARM</span>
+</div>
+<span class="text-xs font-mono text-orange-400">18.1ms</span>
+</div>
+<div class="h-10 flex items-end gap-1 px-1">
+<div class="w-full bg-orange-400/20 h-8 rounded-sm"></div>
+<div class="w-full bg-orange-400/20 h-4 rounded-sm"></div>
+<div class="w-full bg-orange-400/20 h-6 rounded-sm"></div>
+<div class="w-full bg-orange-400 h-9 rounded-sm"></div>
+<div class="w-full bg-orange-400/20 h-7 rounded-sm"></div>
+<div class="w-full bg-orange-400/20 h-5 rounded-sm"></div>
+<div class="w-full bg-orange-400/20 h-4 rounded-sm"></div>
+</div>
+<div class="flex justify-between text-[9px] text-neutral-500 font-bold">
+<span>PUBSUB: 442 MSGS/S</span>
+<span class="text-orange-400">JITTER: 1.2MS</span>
+</div>
+</div>
+<!-- Layer 3: A2A -->
+<div class="space-y-3">
+<div class="flex justify-between items-center">
+<div>
+<span class="text-[10px] font-black text-neutral-500 tracking-tighter mr-2">L3</span>
+<span class="text-xs font-bold uppercase tracking-widest">A2A LOGIC</span>
+</div>
+<span class="text-xs font-mono text-white">READY</span>
+</div>
+<div class="h-1 w-full bg-white/5 rounded-full overflow-hidden">
+<div class="h-full w-[92%] bg-white rounded-full"></div>
+</div>
+<div class="flex justify-between text-[9px] text-neutral-500 font-bold">
+<span>COORDINATION: ACTIVE</span>
+<span>PACKETS: 1.2K</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Tactical Health List -->
+<div class="glass-panel bg-neutral-950/60 border border-white/10 rounded-DEFAULT overflow-hidden">
+<div class="p-4 border-b border-white/5 bg-white/5">
+<p class="text-[10px] font-bold tracking-widest uppercase text-neutral-400">Swarm Health Matrix</p>
+</div>
+<div class="divide-y divide-white/5">
+<div class="p-3 hover:bg-white/5 transition-colors flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-1 h-6 bg-tertiary rounded-full"></div>
+<div>
+<p class="text-xs font-bold">DRN-001 <span class="text-[10px] text-neutral-500 ml-1">LEADER</span></p>
+<p class="text-[10px] text-neutral-500">ALT: 120m | SPD: 45km/h</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-tertiary text-lg">check_circle</span>
+</div>
+<div class="p-3 hover:bg-white/5 transition-colors flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-1 h-6 bg-tertiary rounded-full"></div>
+<div>
+<p class="text-xs font-bold">DRN-002 <span class="text-[10px] text-neutral-500 ml-1">WING</span></p>
+<p class="text-[10px] text-neutral-500">ALT: 118m | SPD: 44km/h</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-tertiary text-lg">check_circle</span>
+</div>
+<div class="p-3 bg-error-container/10 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-1 h-6 bg-error rounded-full"></div>
+<div>
+<p class="text-xs font-bold text-error">DRN-005 <span class="text-[10px] text-neutral-400 ml-1">OFFLINE</span></p>
+<p class="text-[10px] text-neutral-500">LOGIC ANOMALY DETECTED</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-error text-lg">warning</span>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Bottom Panel: Swarm Formation Control -->
+<footer class="p-6 pt-0 relative z-20">
+<div class="glass-panel bg-neutral-950/70 border border-white/10 rounded-lg p-4 flex items-center justify-between">
+<div class="flex items-center gap-8">
+<div>
+<h3 class="text-[10px] font-bold text-neutral-500 uppercase tracking-widest mb-2">Formation Control</h3>
+<div class="flex gap-3">
+<button class="px-6 py-2 bg-surface-container-high hover:bg-surface-bright border border-white/10 rounded-full text-xs font-bold transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">visibility</span>
+                                Scout Formation
+                            </button>
+<button class="px-6 py-2 bg-surface-container-high hover:bg-surface-bright border border-white/10 rounded-full text-xs font-bold transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">layers</span>
+                                Echelon formation
+                            </button>
+<button class="px-6 py-2 bg-surface-container-high hover:bg-surface-bright border border-white/10 rounded-full text-xs font-bold transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">grid_3x3</span>
+                                Grid Cluster
+                            </button>
+</div>
+</div>
+<div class="h-10 w-px bg-white/10"></div>
+<div>
+<h3 class="text-[10px] font-bold text-neutral-500 uppercase tracking-widest mb-2">Emergency Protocols</h3>
+<div class="flex gap-3">
+<button class="px-6 py-2 bg-error/20 hover:bg-error/30 text-error border border-error/50 rounded-full text-xs font-bold transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">emergency_home</span>
+                                Emergency RTL
+                            </button>
+<button class="px-6 py-2 bg-neutral-900 border border-white/5 rounded-full text-xs font-bold opacity-50 cursor-not-allowed flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">dangerous</span>
+                                Hard Terminate
+                            </button>
+</div>
+</div>
+</div>
+<div class="text-right">
+<p class="text-[10px] font-bold text-neutral-500 uppercase tracking-widest mb-1">Session Duration</p>
+<p class="text-xl font-mono text-on-surface">02:44:12</p>
+</div>
+</div>
+</footer>
+</main>
+<!-- Global Hud Decoration Elements -->
+<div class="fixed top-20 right-8 z-50 pointer-events-none text-[8px] font-mono text-neutral-600 uppercase space-y-1">
+<p>AUTH_TOKEN: SYST_0x992B1</p>
+<p>ENCRYPTION: AES-256-GCM</p>
+<p>COORDINATES: 45.523062, -122.676482</p>
+</div>
+<!-- Background Vignette -->
+<div class="fixed inset-0 pointer-events-none bg-radial-gradient from-transparent via-transparent to-black/60"></div>
+</body></html>
