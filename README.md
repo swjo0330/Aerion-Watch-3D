@@ -1,7 +1,7 @@
 <div align="center">
   <img src="assets/w1.png" alt="Aerion SkyWatch 3D Logo" width="100%">
   
-  # 🦅 AERION Mind (Tactical Obsidian GCS)
+  # 🦅 AERION Mind (Strategic Planning Loop, AERION Project)
   
   **대규모 스웜(Swarm) 관제 플랫폼을 위한 초고성능 3D 실시간 텔레메트리 대시보드**
 </div>
