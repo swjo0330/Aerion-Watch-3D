@@ -63,11 +63,28 @@ React 생태계의 성능 한계를 극복하기 위해 가상 DOM을 완전히 
 
 모든 실행 환경은 도커(Docker)로 완벽히 패키징되어 있어 호스트 환경의 복잡한 세팅 없이 즉각적인 배포가 가능합니다.
 
-### 1. 저장소 클론 (Clone Repository)
+### 1. 저장소 클론 및 환경변수 설정
+먼저 저장소를 클론한 뒤, 루트 디렉토리에 `.env` 파일을 생성해야 합니다.
+
 ```bash
 git clone https://github.com/swjo0330/Aerion-Watch-3D.git
 cd Aerion-Watch-3D
+
+# .env 파일 생성
+cp .env.example .env
 ```
+
+**[필수 환경변수 항목 (`.env`)]**
+```env
+# 3D 지도 렌더링을 위한 Cesium Ion 고유 토큰 (발급 필요)
+NEXT_PUBLIC_CESIUM_ION_TOKEN=your_cesium_ion_token_here
+
+# 백엔드 API 및 WebSocket 연결 주소 (기본값)
+NEXT_PUBLIC_API_URL=http://localhost:8000
+NEXT_PUBLIC_WS_URL=ws://localhost:8000/ws
+```
+
+
 
 ### 2. 도커 컨테이너 빌드 및 실행 (Docker Compose)
 ```bash
