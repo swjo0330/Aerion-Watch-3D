@@ -35,7 +35,7 @@ export default function GcsSideNav() {
           <span className="material-symbols-outlined text-sm select-none">route</span>
           <span>Mission Planner</span>
         </Link>
-        <div className="text-neutral-500 px-4 py-3 flex items-center gap-3 hover:bg-white/5 hover:text-neutral-200 transition-all font-medium text-sm tracking-wide cursor-pointer">
+        <div className="text-neutral-500 px-4 py-3 flex items-center gap-3 transition-all font-medium text-sm tracking-wide opacity-50 cursor-not-allowed" title="Coming soon">
           <span className="material-symbols-outlined text-sm select-none">settings_heart</span>
           <span>System Health</span>
         </div>
@@ -46,11 +46,11 @@ export default function GcsSideNav() {
           DEPLOY SWARM
         </button>
         <div className="mt-4 pt-4 border-t border-white/5 space-y-1">
-          <div className="text-neutral-500 px-4 py-2 flex items-center gap-3 hover:text-neutral-200 text-xs cursor-pointer">
+          <div className="text-neutral-500 px-4 py-2 flex items-center gap-3 text-xs opacity-50 cursor-not-allowed" title="Coming soon">
             <span className="material-symbols-outlined text-xs select-none">terminal</span>
             <span>Logs</span>
           </div>
-          <div className="text-neutral-500 px-4 py-2 flex items-center gap-3 hover:text-neutral-200 text-xs cursor-pointer">
+          <div className="text-neutral-500 px-4 py-2 flex items-center gap-3 text-xs opacity-50 cursor-not-allowed" title="Coming soon">
             <span className="material-symbols-outlined text-xs select-none">help_center</span>
             <span>Help</span>
           </div>

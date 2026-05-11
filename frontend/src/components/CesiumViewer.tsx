@@ -257,7 +257,7 @@ export default function CesiumViewer() {
           const ptColor = selected ? Cesium.Color.fromCssColorString("#ffffff") : color;
           const ptOutlineColor = selected ? Cesium.Color.fromCssColorString("#ff5c00") : Cesium.Color.fromCssColorString("#0e0e0e");
           const ptOutlineWidth = selected ? 3 : 1;
-          const ptPixelSize = selected ? 14 : 8;
+          const ptPixelSize = selected ? 18 : 12;
 
           const labelBg = selected
             ? Cesium.Color.fromCssColorString("#ff5c00").withAlpha(0.8)

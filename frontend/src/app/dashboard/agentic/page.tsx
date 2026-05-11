@@ -71,12 +71,12 @@ export default function AgenticReasoningPage() {
           </div>
 
         {/* Central Node Graph */}
-        <div className="w-full h-full relative flex flex-col items-center justify-center pointer-events-auto mt-20">
-          <div className="reasoning-node relative mb-20 bg-[var(--surface-container-high)]/80 backdrop-blur-md border border-[var(--primary-container)] p-4 rounded-xl flex flex-col items-center w-64 glow-orange z-20">
+        <div className="w-full h-full relative flex flex-col items-center justify-center pointer-events-auto mt-10 lg:mt-20">
+          <div className="reasoning-node relative mb-10 lg:mb-20 bg-[var(--surface-container-high)]/80 backdrop-blur-md border border-[var(--primary-container)] p-4 rounded-xl flex flex-col items-center w-64 glow-orange z-20">
             <span className="text-[10px] font-black tracking-widest text-[var(--primary-container)] mb-1 uppercase">Objective Root</span>
             <p className="text-sm font-bold text-center text-white text-shadow">OPTIMIZE SWARM COVERAGE</p>
           </div>
-          <div className="flex gap-12 relative z-10">
+          <div className="flex gap-4 lg:gap-12 relative z-10">
             <div className="relative bg-[var(--surface-container)]/80 border border-white/10 p-3 rounded-lg w-48 flex flex-col items-start backdrop-blur-md shadow-xl transition-all hover:bg-[var(--surface-bright)]/80">
               <span className="text-[9px] text-[var(--tertiary)] mb-1 uppercase font-bold">Heuristic A</span>
               <p className="text-xs font-medium text-white">ENERGY CONSERVATION</p>
@@ -89,7 +89,7 @@ export default function AgenticReasoningPage() {
             </div>
           </div>
           
-          <div className="flex gap-8 mt-20">
+          <div className="hidden lg:flex gap-4 xl:gap-8 mt-10 lg:mt-20">
             <div className="bg-[var(--surface-container-high)]/40 border border-white/5 p-2 rounded text-[10px] text-neutral-500">
                 Path: Delta-01 (Inactive)
             </div>

@@ -70,7 +70,7 @@ export default function GcsTopNav() {
         <div className="flex gap-2 items-center">
           <button
             onClick={logout}
-            className="px-3 py-1 bg-white/5 hover:bg-white/10 text-[10px] font-bold tracking-widest uppercase rounded transition-colors"
+            className="px-3 py-1 bg-white/5 hover:bg-white/10 text-[10px] font-bold tracking-widest uppercase rounded transition-colors whitespace-nowrap"
           >
             {username} OUT
           </button>
